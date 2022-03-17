@@ -1,5 +1,7 @@
 package com.okx.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.okx.OkxApiError;
 import com.okx.exception.OkxApiException;
 import com.okx.security.ApiCredentials;
@@ -22,11 +24,17 @@ import static com.okx.constant.OkxAPIConstants.API_BASE_URL;
  */
 public class OkxApiServiceGenerator {
 
-    private static final Converter.Factory converterFactory = JacksonConverterFactory.create();
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    private static final Converter.Factory converterFactory = JacksonConverterFactory.create(mapper);
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, OkxApiError> errorBodyConverter =
             (Converter<ResponseBody, OkxApiError>) converterFactory.responseBodyConverter(
                     OkxApiError.class, new Annotation[0], null);
+
+    static {
+        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+    }
 
     private final OkHttpClient client;
 

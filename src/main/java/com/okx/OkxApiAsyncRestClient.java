@@ -2,6 +2,7 @@ package com.okx;
 
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
+import com.okx.domain.market.MarketInfo;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -19,5 +20,14 @@ public interface OkxApiAsyncRestClient {
      * @return assets
      */
     CompletableFuture<Response<List<Asset>>> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get all supported markets (asynchronous).
+     *
+     * @return market info
+     */
+    CompletableFuture<Response<List<MarketInfo>>> getMarketInfo();
 
 }

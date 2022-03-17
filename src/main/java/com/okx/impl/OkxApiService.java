@@ -2,6 +2,7 @@ package com.okx.impl;
 
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
+import com.okx.domain.market.MarketInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -20,5 +21,10 @@ public interface OkxApiService {
     @Headers(AUTHORIZATION_REQUIRED_HEADER)
     @GET("/api/v5/asset/currencies")
     Call<Response<List<Asset>>> getAssets();
+
+    // Market endpoints
+
+    @GET("/api/v5/public/instruments?instType=SPOT")
+    Call<Response<List<MarketInfo>>> getMarketInfo();
 
 }

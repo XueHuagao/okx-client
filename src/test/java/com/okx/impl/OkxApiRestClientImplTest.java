@@ -1,9 +1,15 @@
 package com.okx.impl;
 
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.cfg.MapperBuilder;
+import com.fasterxml.jackson.databind.deser.DefaultDeserializationContext;
 import com.okx.OkxApiClientFactory;
 import com.okx.OkxApiRestClient;
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
+import com.okx.domain.market.MarketInfo;
 import com.okx.security.ApiCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +36,13 @@ public class OkxApiRestClientImplTest {
     @Test
     public void getAssets_ShouldReturnAssets() {
         Response<List<Asset>> response = okxApiRestClient.getAssets();
+        assertNotNull(response);
+        assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketInfo_ShouldReturnMarketInfo() {
+        Response<List<MarketInfo>> response = okxApiRestClient.getMarketInfo();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
     }
