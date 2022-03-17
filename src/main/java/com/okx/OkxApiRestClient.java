@@ -3,6 +3,7 @@ package com.okx;
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
+import com.okx.domain.market.MarketTicker;
 
 import java.util.List;
 
@@ -28,5 +29,12 @@ public interface OkxApiRestClient {
      * @return market info
      */
     Response<List<MarketInfo>> getMarketInfo();
+
+    /**
+     * Get market ticker information.
+     *
+     * @return market tickers
+     */
+    Response<List<MarketTicker>> getMarketTickers();
 
 }

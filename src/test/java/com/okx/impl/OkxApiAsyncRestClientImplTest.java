@@ -5,6 +5,7 @@ import com.okx.OkxApiClientFactory;
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
+import com.okx.domain.market.MarketTicker;
 import com.okx.security.ApiCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,13 @@ public class OkxApiAsyncRestClientImplTest {
     @Test
     public void getMarketInfo_ShouldReturnMarketInfo() throws ExecutionException, InterruptedException {
         Response<List<MarketInfo>> response = okxApiAsyncRestClient.getMarketInfo().get();
+        assertNotNull(response);
+        assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() throws ExecutionException, InterruptedException {
+        Response<List<MarketTicker>> response = okxApiAsyncRestClient.getMarketTickers().get();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
     }

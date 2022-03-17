@@ -10,6 +10,7 @@ import com.okx.OkxApiRestClient;
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
+import com.okx.domain.market.MarketTicker;
 import com.okx.security.ApiCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,13 @@ public class OkxApiRestClientImplTest {
     @Test
     public void getMarketInfo_ShouldReturnMarketInfo() {
         Response<List<MarketInfo>> response = okxApiRestClient.getMarketInfo();
+        assertNotNull(response);
+        assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() {
+        Response<List<MarketTicker>> response = okxApiRestClient.getMarketTickers();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
     }

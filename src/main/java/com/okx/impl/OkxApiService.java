@@ -3,6 +3,7 @@ package com.okx.impl;
 import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
+import com.okx.domain.market.MarketTicker;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -26,5 +27,8 @@ public interface OkxApiService {
 
     @GET("/api/v5/public/instruments?instType=SPOT")
     Call<Response<List<MarketInfo>>> getMarketInfo();
+
+    @GET("/api/v5/market/tickers?instType=SPOT")
+    Call<Response<List<MarketTicker>>> getMarketTickers();
 
 }
