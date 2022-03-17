@@ -1,5 +1,5 @@
-# Okex API
+# OKX API
 
-Unofficial Java client for the Okex API.
+Unofficial Java client for the OKX API.
 
-[Okex API Documentation](https://www.okex.com/docs-v5/en/#overview)
+[OKX API Documentation](https://www.okex.com/docs-v5/en/#overview)
