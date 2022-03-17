@@ -6,6 +6,7 @@ import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
 import com.okx.domain.market.MarketTicker;
+import com.okx.domain.market.OrderBook;
 import com.okx.security.ApiCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,5 +50,13 @@ public class OkxApiAsyncRestClientImplTest {
         Response<List<MarketTicker>> response = okxApiAsyncRestClient.getMarketTickers().get();
         assertNotNull(response);
         assertThat(response.getData(), is(not(empty())));
+    }
+
+    @Test
+    public void getOrderBook_ShouldReturnOrderBookForBTCUSDT() throws ExecutionException, InterruptedException {
+        Response<List<OrderBook>> response = okxApiAsyncRestClient.getOrderBook("BTC-USDT", 20).get();
+        assertNotNull(response);
+        assertThat(response.getData().get(0).getAsks(), is(not(empty())));
+        assertThat(response.getData().get(0).getBids(), is(not(empty())));
     }
 }

@@ -4,9 +4,11 @@ import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
 import com.okx.domain.market.MarketTicker;
+import com.okx.domain.market.OrderBook;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
 
 import java.util.List;
 
@@ -30,5 +32,8 @@ public interface OkxApiService {
 
     @GET("/api/v5/market/tickers?instType=SPOT")
     Call<Response<List<MarketTicker>>> getMarketTickers();
+
+    @GET("/api/v5/market/books")
+    Call<Response<List<OrderBook>>> getOrderBook(@Query("instId") String market, @Query("sz") Integer limit);
 
 }

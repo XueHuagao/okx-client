@@ -5,6 +5,7 @@ import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
 import com.okx.domain.market.MarketTicker;
+import com.okx.domain.market.OrderBook;
 
 import java.util.List;
 
@@ -38,5 +39,10 @@ public class OkxApiRestClientImpl implements OkxApiRestClient {
     @Override
     public Response<List<MarketTicker>> getMarketTickers() {
         return executeSync(okxApiService.getMarketTickers());
+    }
+
+    @Override
+    public Response<List<OrderBook>> getOrderBook(String market, Integer limit) {
+        return executeSync(okxApiService.getOrderBook(market, limit));
     }
 }

@@ -4,6 +4,7 @@ import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
 import com.okx.domain.market.MarketTicker;
+import com.okx.domain.market.OrderBook;
 
 import java.util.List;
 
@@ -36,5 +37,14 @@ public interface OkxApiRestClient {
      * @return market tickers
      */
     Response<List<MarketTicker>> getMarketTickers();
+
+    /**
+     * Get orderbook for the market.
+     *
+     * @param market market symbol (e.g. BTC-USDT)
+     * @param limit  depth of the order book. Max depth 400.
+     * @return orderbook
+     */
+    Response<List<OrderBook>> getOrderBook(String market, Integer limit);
 
 }

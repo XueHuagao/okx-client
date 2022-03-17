@@ -5,6 +5,7 @@ import com.okx.domain.Response;
 import com.okx.domain.general.Asset;
 import com.okx.domain.market.MarketInfo;
 import com.okx.domain.market.MarketTicker;
+import com.okx.domain.market.OrderBook;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -42,6 +43,13 @@ public class OkxApiAsyncRestClientImpl implements OkxApiAsyncRestClient {
     public CompletableFuture<Response<List<MarketTicker>>> getMarketTickers() {
         CompletableFuture<Response<List<MarketTicker>>> future = new CompletableFuture<>();
         okxApiService.getMarketTickers().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    @Override
+    public CompletableFuture<Response<List<OrderBook>>> getOrderBook(String market, Integer limit) {
+        CompletableFuture<Response<List<OrderBook>>> future = new CompletableFuture<>();
+        okxApiService.getOrderBook(market, limit).enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }
