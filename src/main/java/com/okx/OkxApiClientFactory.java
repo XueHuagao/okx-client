@@ -14,18 +14,31 @@ public class OkxApiClientFactory {
 
     private final OkxApiServiceGenerator serviceGenerator;
 
-    private final ApiCredentials apiCredentials;
+    private ApiCredentials apiCredentials;
 
     public OkxApiClientFactory() {
-        this(new OkHttpClient(), null);
+        this.serviceGenerator = new OkxApiServiceGenerator(new OkHttpClient());
     }
 
     public OkxApiClientFactory(ApiCredentials apiCredentials) {
-        this(new OkHttpClient(), apiCredentials);
+        this.serviceGenerator = new OkxApiServiceGenerator(new OkHttpClient());
+        this.apiCredentials = apiCredentials;
     }
 
-    private OkxApiClientFactory(OkHttpClient client, ApiCredentials apiCredentials) {
-        this.serviceGenerator = new OkxApiServiceGenerator(client);
+    public OkxApiClientFactory(ApiCredentials apiCredentials, ApiInteractionConfig apiInteractionConfig) {
+        this(new OkHttpClient(), apiCredentials, apiInteractionConfig);
+    }
+
+    private OkxApiClientFactory(OkHttpClient client,
+                                ApiCredentials apiCredentials,
+                                ApiInteractionConfig apiInteractionConfig) {
+        OkHttpClient newClient = client.newBuilder()
+                .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
+                .addInterceptor(new RateLimitInterceptor(
+                        apiInteractionConfig.getMaxRequestsPerSecond(),
+                        apiInteractionConfig.getMaxApiKeyUsagePerSecond()
+                )).build();
+        this.serviceGenerator = new OkxApiServiceGenerator(newClient);
         this.apiCredentials = apiCredentials;
     }
 
