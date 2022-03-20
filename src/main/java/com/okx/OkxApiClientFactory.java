@@ -29,9 +29,9 @@ public class OkxApiClientFactory {
         this(new OkHttpClient(), apiCredentials, apiInteractionConfig);
     }
 
-    private OkxApiClientFactory(OkHttpClient client,
-                                ApiCredentials apiCredentials,
-                                ApiInteractionConfig apiInteractionConfig) {
+    public OkxApiClientFactory(OkHttpClient client,
+                               ApiCredentials apiCredentials,
+                               ApiInteractionConfig apiInteractionConfig) {
         OkHttpClient newClient = client.newBuilder()
                 .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
                 .addInterceptor(new RateLimitInterceptor(
