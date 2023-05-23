@@ -28,9 +28,12 @@ public class OkxApiRestClientImplTest {
 
     @BeforeEach
     public void setUp() {
-        String apiKey = System.getenv("API_KEY");
-        String secret = System.getenv("SECRET");
-        String passphrase = System.getenv("PASSPHRASE");
+//        String apiKey = System.getenv("API_KEY");
+//        String secret = System.getenv("SECRET");
+//        String passphrase = System.getenv("PASSPHRASE");
+        String apiKey = "6e33be67-f587-4740-8edb-a0f840b19d75";
+        String secret = "FC546464E3B4954CDE69AE0EDE13241F";
+        String passphrase = "Xnmbyy+1s";
         ApiCredentials apiCredentials = new ApiCredentials(apiKey, secret, passphrase);
         this.okxApiRestClient = OkxApiClientFactory.newInstance(apiCredentials).newRestClient();
     }
